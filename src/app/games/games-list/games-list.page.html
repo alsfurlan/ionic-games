@@ -1,31 +1,59 @@
 <ion-header>
   <ion-toolbar color="primary">
-
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
     <ion-title>Lista de Games</ion-title>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <ion-list>
     <ion-list-header>Games disponíveis</ion-list-header>
 
-    <ion-item *ngFor="let game of games">
-      <ion-avatar slot="start">
-        <img [src]="game.foto">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{game.nome}}</h2>
-        <h3>Gênero: {{game.genero}}</h3>
-        <h3>Preço: {{game.preco}}</h3>
-        <h4>Lançamento: {{game.lancamento}}</h4>
-      </ion-label>
-    </ion-item>
+    <ion-item-sliding *ngFor="let game of games">
+
+      <ion-item-options side="start">
+        <ion-item-option color="secondary">
+          <ion-icon name="pencil" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger">
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="game.foto" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{game.nome}}</h2>
+          <h3>Gênero: <strong>{{game.genero | genero}}</strong></h3>
+          <h3>
+            Preço:
+            <ion-text color="danger">
+              <strong> {{game.preco | currency : 'R$ '}} </strong>
+            </ion-text>
+          </h3>
+          <small>
+            Lançamento:
+            <ion-text color="medium">
+              {{game.lancamento | date: 'dd/MM/yyyy'}}
+            </ion-text>
+          </small>
+        </ion-label>
+      </ion-item>
+
+    </ion-item-sliding>
   </ion-list>
 
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

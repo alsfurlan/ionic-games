@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { GamesListPageRoutingModule } from './games-list-routing.module';
 
 import { GamesListPage } from './games-list.page';
+import { GeneroPipe } from './genero.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { GamesListPage } from './games-list.page';
     IonicModule,
     GamesListPageRoutingModule
   ],
-  declarations: [GamesListPage]
+  declarations: [GamesListPage, GeneroPipe]
 })
 export class GamesListPageModule {}
