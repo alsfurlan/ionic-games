@@ -1,15 +1,53 @@
 <ion-header>
   <ion-toolbar color="primary">
-
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
     <ion-title>Cadastro de Games</ion-title>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label position="stacked">Nome: </ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
 
+  <ion-item>
+    <ion-label position="stacked">Preço: </ion-label>
+    <ion-input type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Lançamento: </ion-label>
+    <ion-datetime
+      displayFormat="DD/MM/YYYY"
+      cancelText="Cancelar"
+      doneText="Selecionar"
+    ></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Gênero: </ion-label>
+    <ion-select>
+      <ion-select-option value="RPG">RPG</ion-select-option>
+      <ion-select-option value="FPS">FPS</ion-select-option>
+      <ion-select-option value="ESPORTES">Esportes</ion-select-option>
+      <ion-select-option value="ARCADE">Arcade</ion-select-option>
+      <ion-select-option value="ACAO">Ação</ion-select-option>
+      <ion-select-option value="PUZZLE">Quebra-cabeças</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Foto (URL): </ion-label>
+    <ion-input type="url"></ion-input>
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
