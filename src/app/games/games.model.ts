@@ -1,4 +1,5 @@
 export interface Game {
+  id: number;
   nome: string;
   genero: Genero;
   preco: number;

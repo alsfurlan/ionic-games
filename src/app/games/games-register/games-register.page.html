@@ -8,15 +8,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [formGroup]="form">
   <ion-item>
     <ion-label position="stacked">Nome: </ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input type="text" formControlName="nome"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Preço: </ion-label>
-    <ion-input type="number"></ion-input>
+    <ion-input type="number" formControlName="preco"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -25,12 +25,13 @@
       displayFormat="DD/MM/YYYY"
       cancelText="Cancelar"
       doneText="Selecionar"
+      formControlName="lancamento"
     ></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Gênero: </ion-label>
-    <ion-select>
+    <ion-select formControlName="genero">
       <ion-select-option value="RPG">RPG</ion-select-option>
       <ion-select-option value="FPS">FPS</ion-select-option>
       <ion-select-option value="ESPORTES">Esportes</ion-select-option>
@@ -42,11 +43,11 @@
 
   <ion-item>
     <ion-label position="stacked">Foto (URL): </ion-label>
-    <ion-input type="url"></ion-input>
+    <ion-input type="url" formControlName="foto"></ion-input>
   </ion-item>
 
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button>
+    <ion-fab-button (click)="salvar()" [disabled]="!form.valid">
       <ion-icon name="checkmark-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
