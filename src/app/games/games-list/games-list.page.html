@@ -15,7 +15,7 @@
     <ion-item-sliding *ngFor="let game of games">
 
       <ion-item-options side="start">
-        <ion-item-option color="secondary">
+        <ion-item-option color="secondary" [routerLink]="['/games-register', game.id]">
           <ion-icon name="pencil" slot="icon-only"></ion-icon>
         </ion-item-option>
       </ion-item-options>

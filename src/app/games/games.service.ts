@@ -64,10 +64,15 @@ export class GamesService {
 
   public save(game: Game) {
     if (game.id) {
-      // atualizar
+      const index = this.games.findIndex(g => g.id === game.id);
+      this.games[index] = game;
     } else {
       const id = this.contador++;
       this.games.push({ ...game, id });
     }
+  }
+
+  public findById(id: number) {
+    return this.games.find(game => game.id === id);
   }
 }

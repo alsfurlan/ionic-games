@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: GamesRegisterPage
+  },
+  {
+    path: ':id',
+    component: GamesRegisterPage,
   }
 ];
 
