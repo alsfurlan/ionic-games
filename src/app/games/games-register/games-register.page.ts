@@ -30,12 +30,13 @@ export class GamesRegisterPage implements OnInit {
     });
 
     const id = +this.activatedRoute.snapshot.params.id;
-    const game = this.gamesService.findById(id);
-    if (game) {
-      this.form.patchValue({
-        ...game,
-        lancamento: game.lancamento && game.lancamento.toISOString(),
-      });
+    if (id) {
+      const game = this.gamesService.findById(id);
+      if (game) {
+        this.form.patchValue({
+          ...game,
+        });
+      }
     }
   }
 
