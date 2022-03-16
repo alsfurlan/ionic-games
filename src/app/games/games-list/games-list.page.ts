@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { GamesApiService } from '../games-api.service';
 import { Game, Genero } from '../games.model';
 
 import { GamesService } from '../games.service';
@@ -14,9 +15,13 @@ export class GamesListPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private gamesService: GamesService
+    private gamesService: GamesService,
+    private gamesApiService: GamesApiService,
   ) {
-    this.games = this.gamesService.getGames();
+    this.gamesApiService.getGames().subscribe(
+      (games) => this.games = games,
+      (error) => console.error(error)
+    );
   }
 
   ngOnInit() {}
