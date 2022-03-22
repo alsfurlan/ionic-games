@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { GamesApiService } from '../games-api.service';
-import { Game, Genero } from '../games.model';
+import { Game } from '../games.model';
 
 import { GamesService } from '../games.service';
 
@@ -17,14 +17,47 @@ export class GamesListPage implements OnInit {
     private alertController: AlertController,
     private gamesService: GamesService,
     private gamesApiService: GamesApiService,
+    private toastController: ToastController
   ) {
+    this.games = [];
+  }
+
+  ngOnInit() {
+    this.listGames();
+  }
+
+  listGames() {
     this.gamesApiService.getGames().subscribe(
-      (games) => this.games = games,
-      (error) => console.error(error)
+      (games) => this.listGamesSuccess(games),
+      () => this.listGamesFail()
     );
   }
 
-  ngOnInit() {}
+  listGamesSuccess(games: Game[]) {
+    this.games = games;
+  }
+
+  async listGamesFail() {
+    // this.toastController
+    //   .create({
+    //     message: 'Erro ao buscar a lista de games'
+    //   }).then(toast => toast.present());
+
+    const toast = await this.toastController.create({
+      message: 'Erro ao buscar a lista de games',
+      color: 'danger',
+      position: 'top',
+      buttons: [
+        {
+          icon: 'refresh-outline',
+          side: 'start',
+          handler: () => this.listGames(),
+        },
+        { side: 'end', icon: 'close-outline' },
+      ],
+    });
+    toast.present();
+  }
 
   excluir(game: Game) {
     this.alertController
