@@ -15,7 +15,6 @@ export class GamesListPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private gamesService: GamesService,
     private gamesApiService: GamesApiService,
     private toastController: ToastController
   ) {
@@ -28,38 +27,12 @@ export class GamesListPage implements OnInit {
 
   listGames() {
     this.gamesApiService.getGames().subscribe(
-      (games) => this.listGamesSuccess(games),
-      () => this.listGamesFail()
+      (games) => this.games = games,
+      () => this.onFail('Erro ao buscar a lista de games', () => this.listGames())
     );
   }
 
-  listGamesSuccess(games: Game[]) {
-    this.games = games;
-  }
-
-  async listGamesFail() {
-    // this.toastController
-    //   .create({
-    //     message: 'Erro ao buscar a lista de games'
-    //   }).then(toast => toast.present());
-
-    const toast = await this.toastController.create({
-      message: 'Erro ao buscar a lista de games',
-      color: 'danger',
-      position: 'top',
-      buttons: [
-        {
-          icon: 'refresh-outline',
-          side: 'start',
-          handler: () => this.listGames(),
-        },
-        { side: 'end', icon: 'close-outline' },
-      ],
-    });
-    toast.present();
-  }
-
-  excluir(game: Game) {
+  confirmRemove(game: Game) {
     this.alertController
       .create({
         header: 'Exclusão',
@@ -67,10 +40,7 @@ export class GamesListPage implements OnInit {
         buttons: [
           {
             text: 'Sim',
-            handler: () => {
-              this.gamesService.remove(game.nome);
-              this.games = this.gamesService.getGames();
-            },
+            handler: () => this.remove(game),
           },
           {
             text: 'Não',
@@ -78,5 +48,35 @@ export class GamesListPage implements OnInit {
         ],
       })
       .then((alert) => alert.present());
+  }
+
+  remove(game: Game) {
+    this.gamesApiService.remove(game.id)
+      .subscribe(
+      () => {
+        // Alternativa 1
+        this.listGames();
+        // Alternativa 2
+        // this.games = this.games.filter(g => g.id !== game.id);
+      },
+      () => this.onFail('Erro ao excluir o game', () => this.remove(game)));
+  }
+
+
+  async onFail(message: string, handler: () => void) {
+    const toast = await this.toastController.create({
+      message,
+      color: 'danger',
+      position: 'top',
+      buttons: [
+        {
+          icon: 'refresh-outline',
+          side: 'start',
+          handler: () => handler(),
+        },
+        { side: 'end', icon: 'close-outline' },
+      ],
+    });
+    toast.present();
   }
 }
