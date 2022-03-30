@@ -23,6 +23,9 @@ export class GamesApiService {
   }
 
   save(game: Game): Observable<Game> {
+    if(game.id) {
+      return this.httpClient.put<Game>(`${environment.apiUrl}/games/${game.id}`, game);
+    }
     return this.httpClient.post<Game>(`${environment.apiUrl}/games`, game);
   }
 }
