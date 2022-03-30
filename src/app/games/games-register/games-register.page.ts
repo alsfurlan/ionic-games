@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ViewDidEnter,
+  ViewDidLeave,
+  ViewWillEnter,
+  ViewWillLeave,
+} from '@ionic/angular';
+import { GamesApiService } from '../games-api.service';
 import { Genero } from '../games.model';
 import { GamesService } from '../games.service';
 
@@ -9,17 +16,26 @@ import { GamesService } from '../games.service';
   templateUrl: './games-register.page.html',
   styleUrls: ['./games-register.page.scss'],
 })
-export class GamesRegisterPage implements OnInit {
+export class GamesRegisterPage
+  implements
+    OnInit,
+    OnDestroy,
+    ViewWillEnter,
+    ViewDidEnter,
+    ViewWillLeave,
+    ViewDidLeave
+{
   form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private gamesService: GamesService,
+    private gamesApiService: GamesApiService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    console.log('GamesRegisterPage ngOnInit');
     this.form = this.formBuilder.group({
       id: [''],
       nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -31,17 +47,39 @@ export class GamesRegisterPage implements OnInit {
 
     const id = +this.activatedRoute.snapshot.params.id;
     if (id) {
-      const game = this.gamesService.findById(id);
-      if (game) {
-        this.form.patchValue({
-          ...game,
-        });
-      }
+      this.gamesApiService.findById(id).subscribe((game) => {
+        if (game) {
+          this.form.patchValue({
+            ...game,
+          });
+        }
+      });
     }
   }
 
+  ionViewWillEnter(): void {
+    console.log('GamesRegisterPage ionViewWillEnter');
+  }
+
+  ionViewDidEnter(): void {
+    console.log('GamesRegisterPage ionViewDidEnter');
+  }
+
+  ionViewWillLeave(): void {
+    console.log('GamesRegisterPage ionViewWillLeave');
+  }
+
+  ionViewDidLeave(): void {
+    console.log('GamesRegisterPage ionViewDidLeave');
+  }
+
+  ngOnDestroy(): void {
+    console.log('GamesRegisterPage ngOnDestroy');
+  }
+
   salvar() {
-    this.gamesService.save(this.form.value);
-    this.router.navigate(['games-list']);
+    this.gamesApiService
+      .save(this.form.value)
+      .subscribe(() => this.router.navigate(['games-list']));
   }
 }

@@ -39,6 +39,62 @@
       "lancamento": "2022-02-17",
       "foto": "https://m.media-amazon.com/images/I/810V2t+RstL._AC_SL1500_.jpg",
       "id": 6
+    },
+    {
+      "id": 8,
+      "nome": "Fortnite",
+      "preco": 0,
+      "lancamento": "2020-03-29T20:03:46.887-03:00",
+      "genero": "ACAO",
+      "foto": "https://files.tecnoblog.net/wp-content/uploads/2021/03/como-mudar-de-skin-no-fortnite-001-700x394.jpg"
+    },
+    {
+      "id": 9,
+      "nome": "Call of Duty Mobile",
+      "preco": 0,
+      "lancamento": "2021-03-29T20:08:54.363-03:00",
+      "genero": "FPS",
+      "foto": "https://cdn1.dotesports.com/wp-content/uploads/sites/3/2021/02/11123637/GarenaWorld.png"
+    },
+    {
+      "id": 10,
+      "nome": "Lost Ark",
+      "preco": 0,
+      "lancamento": "2022-03-29T20:16:06.757-03:00",
+      "genero": "RPG",
+      "foto": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSylObVvIpNu_ftQLq2m5wxKpcmZJCej42XOoaXO-DbA8wEboSp"
+    },
+    {
+      "id": 11,
+      "nome": "Super Mario",
+      "preco": 0,
+      "lancamento": "1995-03-29T20:24:45.412-03:00",
+      "genero": "ARCADE",
+      "foto": "https://supermariorun.com/assets/img/stage/mario03.png"
+    },
+    {
+      "id": 12,
+      "nome": "Donkey Kong",
+      "preco": 0,
+      "lancamento": "2015-03-29T20:33:19.546-03:00",
+      "genero": "ACAO",
+      "foto": "https://sm.ign.com/ign_br/screenshot/default/donkey-kong-country-finally-added-to-switch-online-library-f_ugdn.jpg"
+    },
+    {
+      "id": 13,
+      "nome": "GTA San Andreas",
+      "preco": 25,
+      "lancamento": "2004-03-29T20:40:12.227-03:00",
+      "genero": "ACAO",
+      "foto": "https://upload.wikimedia.org/wikipedia/pt/d/d3/Grand_Theft_Auto_San_Andreas_capa.png"
+    },
+    {
+      "id": 14,
+      "nome": "GTA Vice City",
+      "preco": 20,
+      "lancamento": "2002-03-29T20:43:15.309-03:00",
+      "genero": "ACAO",
+      "foto": "https://upload.wikimedia.org/wikipedia/pt/6/68/Grand_Theft_Auto_Vice_City_capa.png"
     }
   ]
 }
