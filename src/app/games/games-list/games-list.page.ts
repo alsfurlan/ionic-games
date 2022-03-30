@@ -7,6 +7,7 @@ import {
   ViewWillEnter,
   ViewWillLeave,
 } from '@ionic/angular';
+import { MessageService } from 'src/app/services/message.service';
 import { GamesApiService } from '../games-api.service';
 import { Game } from '../games.model';
 
@@ -31,7 +32,7 @@ export class GamesListPage
   constructor(
     private alertController: AlertController,
     private gamesApiService: GamesApiService,
-    private toastController: ToastController
+    private messageService: MessageService,
   ) {
     this.games = [];
   }
@@ -65,7 +66,7 @@ export class GamesListPage
     this.gamesApiService.getGames().subscribe(
       (games) => (this.games = games),
       () =>
-        this.onFail('Erro ao buscar a lista de games', () => this.listGames())
+        this.messageService.error('Erro ao buscar a lista de games', () => this.listGames())
     );
   }
 
@@ -95,24 +96,8 @@ export class GamesListPage
         // Alternativa 2
         // this.games = this.games.filter(g => g.id !== game.id);
       },
-      () => this.onFail('Erro ao excluir o game', () => this.remove(game))
+      () => this.messageService.error('Erro ao excluir o game', () => this.remove(game))
     );
   }
 
-  async onFail(message: string, handler: () => void) {
-    const toast = await this.toastController.create({
-      message,
-      color: 'danger',
-      position: 'top',
-      buttons: [
-        {
-          icon: 'refresh-outline',
-          side: 'start',
-          handler: () => handler(),
-        },
-        { side: 'end', icon: 'close-outline' },
-      ],
-    });
-    toast.present();
-  }
 }

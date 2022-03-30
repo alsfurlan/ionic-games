@@ -7,9 +7,9 @@ import {
   ViewWillEnter,
   ViewWillLeave,
 } from '@ionic/angular';
+import { MessageService } from '../../services/message.service';
 import { GamesApiService } from '../games-api.service';
 import { Genero } from '../games.model';
-import { GamesService } from '../games.service';
 
 @Component({
   selector: 'app-games-register',
@@ -31,7 +31,8 @@ export class GamesRegisterPage
     private formBuilder: FormBuilder,
     private gamesApiService: GamesApiService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -47,14 +48,21 @@ export class GamesRegisterPage
 
     const id = +this.activatedRoute.snapshot.params.id;
     if (id) {
-      this.gamesApiService.findById(id).subscribe((game) => {
+      this.findById(id);
+    }
+  }
+
+  findById(id: number) {
+    this.gamesApiService.findById(id).subscribe(
+      (game) => {
         if (game) {
           this.form.patchValue({
             ...game,
           });
         }
-      });
-    }
+      },
+      () => this.messageService.error(`Erro ao buscar o game com código ${id}`, () => this.findById(id))
+    );
   }
 
   ionViewWillEnter(): void {
@@ -78,8 +86,15 @@ export class GamesRegisterPage
   }
 
   salvar() {
-    this.gamesApiService
-      .save(this.form.value)
-      .subscribe(() => this.router.navigate(['games-list']));
+    // const nome = this.form.value.nome;
+    const { nome } = this.form.value;
+
+    this.gamesApiService.save(this.form.value).subscribe(
+      () => this.router.navigate(['games-list']),
+      () =>
+        this.messageService.error(`Erro ao salvar o game ${nome}`, () =>
+          this.salvar()
+        )
+    );
   }
 }
