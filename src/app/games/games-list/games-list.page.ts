@@ -28,6 +28,7 @@ export class GamesListPage
     ViewDidLeave
 {
   games: Game[];
+  loading = false;
 
   constructor(
     private alertController: AlertController,
@@ -63,10 +64,16 @@ export class GamesListPage
   }
 
   listGames() {
+    this.loading = true;
     this.gamesApiService.getGames().subscribe(
-      (games) => (this.games = games),
-      () =>
+      (games) => {
+        this.games = games
+        this.loading = false;
+      },
+      () => {
         this.messageService.error('Erro ao buscar a lista de games', () => this.listGames())
+        this.loading = false;
+      }
     );
   }
 

@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch db.json --delay 3000"
   },
   "private": true,
   "dependencies": {

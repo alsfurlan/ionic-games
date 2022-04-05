@@ -10,7 +10,10 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Games disponíveis</ion-list-header>
+    <ion-list-header>
+      Games disponíveis
+      <ion-spinner *ngIf="loading"></ion-spinner>
+    </ion-list-header>
 
     <ion-item-sliding *ngFor="let game of games">
 
