@@ -2,5 +2,4 @@
 - Games favoritos (usando localStorage)
 - Padrão Classe/Interface (DTO)
 - Cadastro de gênero de games
-- Incluir busy loaders no projeto
 - Exibir mensagens nas validações de formulário

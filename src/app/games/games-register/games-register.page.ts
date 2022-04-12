@@ -10,6 +10,7 @@ import {
 import { MessageService } from '../../services/message.service';
 import { GamesApiService } from '../games-api.service';
 import { Genero } from '../games.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-games-register',
@@ -26,6 +27,7 @@ export class GamesRegisterPage
     ViewDidLeave
 {
   form: FormGroup;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,16 +55,28 @@ export class GamesRegisterPage
   }
 
   findById(id: number) {
-    this.gamesApiService.findById(id).subscribe(
-      (game) => {
-        if (game) {
-          this.form.patchValue({
-            ...game,
-          });
-        }
-      },
-      () => this.messageService.error(`Erro ao buscar o game com código ${id}`, () => this.findById(id))
-    );
+    this.loading = true;
+    this.gamesApiService
+      .findById(id)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe(
+        (game) => {
+          if (game) {
+            this.form.patchValue({
+              ...game,
+            });
+          }
+        },
+        () =>
+          this.messageService.error(
+            `Erro ao buscar o game com código ${id}`,
+            () => this.findById(id)
+          )
+      );
   }
 
   ionViewWillEnter(): void {
@@ -89,12 +103,24 @@ export class GamesRegisterPage
     // const nome = this.form.value.nome;
     const { nome } = this.form.value;
 
-    this.gamesApiService.save(this.form.value).subscribe(
-      () => this.router.navigate(['games-list']),
-      () =>
-        this.messageService.error(`Erro ao salvar o game ${nome}`, () =>
-          this.salvar()
-        )
-    );
+    this.loading = true;
+
+    this.gamesApiService
+      .save(this.form.value)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe(
+        () => {
+          this.router.navigate(['games-list']);
+        },
+        () => {
+          this.messageService.error(`Erro ao salvar o game ${nome}`, () =>
+            this.salvar()
+          );
+        }
+      );
   }
 }

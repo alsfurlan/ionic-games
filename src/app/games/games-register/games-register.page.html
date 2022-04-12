@@ -9,42 +9,51 @@
 </ion-header>
 
 <ion-content [formGroup]="form">
-  <ion-item>
-    <ion-label position="stacked">Nome: </ion-label>
-    <ion-input type="text" formControlName="nome"></ion-input>
-  </ion-item>
+  <ion-card>
+    <ion-card-content>
+      <div class="ion-text-center" *ngIf="loading">
+        <ion-spinner></ion-spinner>
+      </div>
+      <div *ngIf="!loading">
+        <ion-item>
+          <ion-label position="stacked">Nome: </ion-label>
+          <ion-input type="text" formControlName="nome"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Preço: </ion-label>
-    <ion-input type="number" formControlName="preco"></ion-input>
-  </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Preço: </ion-label>
+          <ion-input type="number" formControlName="preco"></ion-input>
+        </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Lançamento: </ion-label>
-    <ion-datetime
-      displayFormat="DD/MM/YYYY"
-      cancelText="Cancelar"
-      doneText="Selecionar"
-      formControlName="lancamento"
-    ></ion-datetime>
-  </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Lançamento: </ion-label>
+          <ion-datetime
+            displayFormat="DD/MM/YYYY"
+            cancelText="Cancelar"
+            doneText="Selecionar"
+            formControlName="lancamento"
+          ></ion-datetime>
+        </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Gênero: </ion-label>
-    <ion-select formControlName="genero">
-      <ion-select-option value="RPG">RPG</ion-select-option>
-      <ion-select-option value="FPS">FPS</ion-select-option>
-      <ion-select-option value="ESPORTES">Esportes</ion-select-option>
-      <ion-select-option value="ARCADE">Arcade</ion-select-option>
-      <ion-select-option value="ACAO">Ação</ion-select-option>
-      <ion-select-option value="PUZZLE">Quebra-cabeças</ion-select-option>
-    </ion-select>
-  </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Gênero: </ion-label>
+          <ion-select formControlName="genero">
+            <ion-select-option value="RPG">RPG</ion-select-option>
+            <ion-select-option value="FPS">FPS</ion-select-option>
+            <ion-select-option value="ESPORTES">Esportes</ion-select-option>
+            <ion-select-option value="ARCADE">Arcade</ion-select-option>
+            <ion-select-option value="ACAO">Ação</ion-select-option>
+            <ion-select-option value="PUZZLE">Quebra-cabeças</ion-select-option>
+          </ion-select>
+        </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Foto (URL): </ion-label>
-    <ion-input type="url" formControlName="foto"></ion-input>
-  </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Foto (URL): </ion-label>
+          <ion-input type="url" formControlName="foto"></ion-input>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
 
   <ion-fab vertical="bottom" horizontal="end">
     <ion-fab-button (click)="salvar()" [disabled]="!form.valid">
