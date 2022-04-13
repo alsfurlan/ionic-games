@@ -104,22 +104,19 @@ export class GamesListPage
     this.loading = true;
     this.gamesApiService
       .remove(game.id)
-      .pipe(
-        finalize(() => {
-          this.loading = false;
-        })
-      )
       .subscribe(
         () => {
-          // Alternativa 1
+          this.messageService.success(`Excluído game ${game.nome} com sucesso!`);
           this.listGames();
           // Alternativa 2
           // this.games = this.games.filter(g => g.id !== game.id);
         },
-        () =>
+        () => {
           this.messageService.error('Erro ao excluir o game', () =>
             this.remove(game)
-          )
+          );
+          this.loading = false;
+        }
       );
   }
 }

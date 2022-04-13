@@ -114,6 +114,7 @@ export class GamesRegisterPage
       )
       .subscribe(
         () => {
+          this.messageService.success(`Game ${nome} foi salvo sucesso!`);
           this.router.navigate(['games-list']);
         },
         () => {

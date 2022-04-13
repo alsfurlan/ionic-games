@@ -10,6 +10,22 @@ export class MessageService {
     private toastController: ToastController
   ) { }
 
+  async success(message: string) {
+    const toast = await this.toastController.create({
+      message,
+      color: 'success',
+      position: 'top',
+      duration: 5000,
+      buttons: [
+        {
+          icon: 'close-outline',
+          side: 'end',
+        }
+      ]
+    });
+    toast.present();
+  }
+
   async error(message: string, handler: () => void) {
     const toast = await this.toastController.create({
       message,
