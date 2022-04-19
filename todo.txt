@@ -1,4 +1,3 @@
-- Games favoritos (usando localStorage)
 - Padrão Classe/Interface (DTO)
 - Cadastro de gênero de games
 - Exibir mensagens nas validações de formulário

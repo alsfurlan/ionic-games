@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { GamesListPageRoutingModule } from './games-list-routing.module';
+import { GamesWishListPageRoutingModule } from './games-wish-list-routing.module';
 
-import { GamesListPage } from './games-list.page';
+import { GamesWishListPage } from './games-wish-list.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    GamesListPageRoutingModule,
+    GamesWishListPageRoutingModule,
     SharedModule,
   ],
-  declarations: [GamesListPage]
+  declarations: [GamesWishListPage]
 })
-export class GamesListPageModule {}
+export class GamesWishListPageModule {}

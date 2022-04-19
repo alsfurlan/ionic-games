@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AlertController,
+  IonItemSliding,
   ToastController,
   ViewDidEnter,
   ViewDidLeave,
@@ -10,6 +11,7 @@ import {
 import { finalize } from 'rxjs/operators';
 import { MessageService } from 'src/app/services/message.service';
 import { GamesApiService } from '../games-api.service';
+import { GamesWishListService } from '../games-wish-list.service';
 import { Game } from '../games.model';
 
 import { GamesService } from '../games.service';
@@ -34,7 +36,8 @@ export class GamesListPage
   constructor(
     private alertController: AlertController,
     private gamesApiService: GamesApiService,
-    private messageService: MessageService
+    private gamesWishListService: GamesWishListService,
+    private messageService: MessageService,
   ) {
     this.games = [];
   }
@@ -118,5 +121,13 @@ export class GamesListPage
           this.loading = false;
         }
       );
+  }
+
+  addWishList(game: Game) {
+    this.gamesWishListService.add(game);
+  }
+
+  close(sliding: IonItemSliding) {
+    sliding.close();
   }
 }
