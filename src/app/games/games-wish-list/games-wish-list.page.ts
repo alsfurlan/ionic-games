@@ -14,10 +14,19 @@ export class GamesWishListPage implements OnInit {
   constructor(private gamesWishList: GamesWishListService) {}
 
   ngOnInit() {
+    this.loadWishList();
+  }
+
+  loadWishList() {
     this.loading = true;
     this.gamesWishList.getWishList().subscribe((games) => {
       this.games = games;
       this.loading = false;
     });
+  }
+
+  remove(game: Game) {
+    this.gamesWishList.remove(game);
+    this.loadWishList();
   }
 }

@@ -9,15 +9,28 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let game of games">
-    <ion-img [src]="game.foto"></ion-img>
-    <ion-card-header>
-      <ion-card-title> {{ game.nome }} </ion-card-title>
-      <ion-card-subtitle> {{game.preco | currency: 'BRL'}} </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <strong>Genero: </strong> {{ game.genero | genero}} <br />
-      <strong>Lançamento: </strong> {{ game.lancamento | date: 'dd/MM/yyyy'}}
-    </ion-card-content>
-  </ion-card>
+  <ion-list>
+    <ion-list-header>
+      Lista de desejos
+      <ion-spinner class="ion-margin-start" *ngIf="loading"></ion-spinner>
+    </ion-list-header>
+  </ion-list>
+  <div *ngIf="!loading">
+    <ion-card *ngFor="let game of games">
+      <ion-img [src]="game.foto"></ion-img>
+      <ion-card-header>
+        <ion-card-title>
+          {{ game.nome }}
+          <ion-icon name="trash-outline" (click)="remove(game)"></ion-icon>
+        </ion-card-title>
+        <ion-card-subtitle>
+          {{game.preco | currency: 'BRL'}}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <strong>Genero: </strong> {{ game.genero | genero}} <br />
+        <strong>Lançamento: </strong> {{ game.lancamento | date: 'dd/MM/yyyy'}}
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

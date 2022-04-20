@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { MessageService } from '../services/message.service';
 import { GamesApiService } from './games-api.service';
 import { Game } from './games.model';
@@ -12,7 +12,7 @@ export class GamesWishListService {
 
   constructor(
     private gamesApiService: GamesApiService,
-    private messageMessage: MessageService,
+    private messageMessage: MessageService
   ) {
     this.gamesIds = JSON.parse(localStorage.getItem('wishList')) ?? [];
   }
@@ -21,11 +21,11 @@ export class GamesWishListService {
     const requests = this.gamesIds.map((gameId) =>
       this.gamesApiService.findById(gameId)
     );
-    return forkJoin(requests);
+    return requests.length ? forkJoin(requests) : of([]) ;
   }
 
   add({ id, nome }: Game) {
-    if(this.gamesIds.some(gameId => gameId === id)) {
+    if (this.gamesIds.some((gameId) => gameId === id)) {
       this.messageMessage.error(`Jogo ${nome} já está na sua lista de desejos`);
       return;
     }
@@ -34,5 +34,11 @@ export class GamesWishListService {
     // this.gamesIds.push(id);
     localStorage.setItem('wishList', JSON.stringify(this.gamesIds));
     this.messageMessage.success(`Jogo ${nome} adicionado à lista de desejos!`);
+  }
+
+  remove({ id, nome }: Game) {
+    this.gamesIds = this.gamesIds.filter((gameId) => gameId !== id);
+    localStorage.setItem('wishList', JSON.stringify(this.gamesIds));
+    this.messageMessage.success(`Jogo ${nome} removido da lista de desejos!`);
   }
 }
