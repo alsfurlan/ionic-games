@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Platformas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Plataformas
+      <ion-spinner class="ion-margin-start" *ngIf="loading"></ion-spinner>
+    </ion-list-header>
+
+    <ion-item *ngFor="let platform of platforms">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="platform.logo"></ion-img>
+      </ion-thumbnail>
+      <ion-label>{{platform.description}}</ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="add()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

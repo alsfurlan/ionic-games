@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'games-wish-list',
     loadChildren: () => import('./games/games-wish-list/games-wish-list.module').then( m => m.GamesWishListPageModule)
   },
+  {
+    path: 'platforms',
+    loadChildren: () => import('./platforms/platforms.module').then( m => m.PlatformsPageModule)
+  },
 ];
 
 @NgModule({

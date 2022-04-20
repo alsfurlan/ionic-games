@@ -96,5 +96,27 @@
       "genero": "ACAO",
       "foto": "https://upload.wikimedia.org/wikipedia/pt/6/68/Grand_Theft_Auto_Vice_City_capa.png"
     }
+  ],
+  "platforms": [
+    {
+      "id": 1,
+      "description": "Playstation",
+      "logo": "https://i.pinimg.com/originals/79/5f/11/795f11fed817bee6876f0a310e67e4bf.png"
+    },
+    {
+      "id": 2,
+      "description": "Xbox",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Xbox_logo_%282019%29.svg/1200px-Xbox_logo_%282019%29.svg.png"
+    },
+    {
+      "description": "Nintedo Wii",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Wii-Console.png/1200px-Wii-Console.png",
+      "id": 3
+    },
+    {
+      "description": "PC",
+      "logo": "https://images-americanas.b2w.io/produtos/2973352707/imagens/pc-completo-gamer-promocao-30-jogos-promocao/2973352715_1_large.jpg",
+      "id": 4
+    }
   ]
 }
