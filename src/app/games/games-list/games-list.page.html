@@ -47,12 +47,20 @@
                 <strong> {{game.preco | currency : 'R$ '}} </strong>
               </ion-text>
             </h3>
-            <small>
+            <h4 *ngIf="game.plataformas?.length">
+              Plataformas:
+              <ul class="plataformas">
+                <li *ngFor="let plataforma of game.plataformas">
+                  - {{ plataforma.description }}
+                </li>
+              </ul>
+            </h4>
+            <h4>
               Lançamento:
               <ion-text color="medium">
                 {{game.lancamento | date: 'dd/MM/yyyy'}}
               </ion-text>
-            </small>
+            </h4>
           </ion-label>
         </ion-item>
       </ion-item-sliding>

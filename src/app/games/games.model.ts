@@ -1,3 +1,5 @@
+import { Platform } from '../platforms/platforms.model';
+
 export interface Game {
   id: number;
   nome: string;
@@ -5,6 +7,7 @@ export interface Game {
   preco: number;
   lancamento: Date;
   foto: string;
+  plataformas: Platform[];
 }
 
 export enum Genero {

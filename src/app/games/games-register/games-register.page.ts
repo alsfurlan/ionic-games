@@ -11,6 +11,8 @@ import { MessageService } from '../../services/message.service';
 import { GamesApiService } from '../games-api.service';
 import { Genero } from '../games.model';
 import { finalize } from 'rxjs/operators';
+import { Platform } from 'src/app/platforms/platforms.model';
+import { PlatformsService } from 'src/app/platforms/platforms.service';
 
 @Component({
   selector: 'app-games-register',
@@ -28,22 +30,28 @@ export class GamesRegisterPage
 {
   form: FormGroup;
   loading = false;
+  platforms: Platform[];
 
   constructor(
     private formBuilder: FormBuilder,
     private gamesApiService: GamesApiService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private platformService: PlatformsService
   ) {}
 
   ngOnInit() {
     console.log('GamesRegisterPage ngOnInit');
+
+    this.platformService.findAll().subscribe((platforms) => this.platforms = platforms);
+
     this.form = this.formBuilder.group({
       id: [''],
       nome: ['', [Validators.required, Validators.minLength(3)]],
       preco: ['', Validators.required],
       lancamento: [''],
+      plataformas: [[]],
       genero: [Genero.ACAO, Validators.required],
       foto: ['', Validators.required],
     });
@@ -97,6 +105,18 @@ export class GamesRegisterPage
 
   ngOnDestroy(): void {
     console.log('GamesRegisterPage ngOnDestroy');
+  }
+
+  compareWith(o1: Platform, o2: Platform | Platform[]) {
+    if (!o1 || !o2) {
+      return o1 === o2;
+    }
+
+    if (Array.isArray(o2)) {
+      return o2.some((u: Platform) => u.id === o1.id);
+    }
+
+    return o1.id === o2.id;
   }
 
   salvar() {

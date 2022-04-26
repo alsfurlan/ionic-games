@@ -69,6 +69,18 @@
       "nome": "Super Mario",
       "preco": 0,
       "lancamento": "1995-03-29T20:24:45.412-03:00",
+      "plataformas": [
+        {
+          "description": "PC",
+          "logo": "https://images-americanas.b2w.io/produtos/2973352707/imagens/pc-completo-gamer-promocao-30-jogos-promocao/2973352715_1_large.jpg",
+          "id": 4
+        },
+        {
+          "description": "Super nintendo",
+          "logo": "https://images-na.ssl-images-amazon.com/images/I/41jlkuoYoVL._SX258_BO1,204,203,200_QL70_ML2_.jpg",
+          "id": 5
+        }
+      ],
       "genero": "ARCADE",
       "foto": "https://supermariorun.com/assets/img/stage/mario03.png"
     },
@@ -95,6 +107,26 @@
       "lancamento": "2002-03-29T20:43:15.309-03:00",
       "genero": "ACAO",
       "foto": "https://upload.wikimedia.org/wikipedia/pt/6/68/Grand_Theft_Auto_Vice_City_capa.png"
+    },
+    {
+      "id": 17,
+      "nome": "GTA 5",
+      "preco": 90,
+      "lancamento": "2015-04-26T19:52:59.363-03:00",
+      "plataformas": [
+        {
+          "id": 1,
+          "description": "Playstation",
+          "logo": "https://i.pinimg.com/originals/79/5f/11/795f11fed817bee6876f0a310e67e4bf.png"
+        },
+        {
+          "id": 2,
+          "description": "Xbox",
+          "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Xbox_logo_%282019%29.svg/1200px-Xbox_logo_%282019%29.svg.png"
+        }
+      ],
+      "genero": "ACAO",
+      "foto": "https://img.g2a.com/323x433/1x1x0/grand-theft-auto-v-premium-online-edition-rockstar-key-global/5d14729446177c656b5211b2"
     }
   ],
   "platforms": [
@@ -117,6 +149,11 @@
       "description": "PC",
       "logo": "https://images-americanas.b2w.io/produtos/2973352707/imagens/pc-completo-gamer-promocao-30-jogos-promocao/2973352715_1_large.jpg",
       "id": 4
+    },
+    {
+      "description": "Super nintendo",
+      "logo": "https://images-na.ssl-images-amazon.com/images/I/41jlkuoYoVL._SX258_BO1,204,203,200_QL70_ML2_.jpg",
+      "id": 5
     }
   ]
 }
