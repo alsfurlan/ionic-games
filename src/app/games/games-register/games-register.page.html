@@ -49,14 +49,14 @@
 
         <ion-item>
           <ion-label position="stacked">Foto (URL): </ion-label>
-          <ion-input type="url" formControlName="foto"></ion-input>
+          <ion-input type="url" formControlName="logo"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label>Plataformas: </ion-label>
           <ion-select formControlName="plataformas" multiple="true" cancelText="Cancelar" [compareWith]="compareWith">
             <ion-select-option *ngFor="let platform of platforms" [value]="platform">
-              {{ platform.description }}
+              {{ platform.descricao }}
             </ion-select-option>
           </ion-select>
         </ion-item>

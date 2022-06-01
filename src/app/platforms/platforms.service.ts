@@ -11,10 +11,10 @@ export class PlatformsService {
   constructor(private httpClient: HttpClient) {}
 
   findAll(): Observable<Platform[]> {
-    return this.httpClient.get<Platform[]>(`${environment.apiUrl}/platforms`);
+    return this.httpClient.get<Platform[]>(`${environment.apiUrl}/plataformas`);
   }
 
   save(platform: Platform) {
-    return this.httpClient.post(`${environment.apiUrl}/platforms`, platform);
+    return this.httpClient.post(`${environment.apiUrl}/plataformas`, platform);
   }
 }

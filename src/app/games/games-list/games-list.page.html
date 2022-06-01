@@ -36,7 +36,7 @@
 
         <ion-item>
           <ion-avatar slot="start">
-            <img [src]="game.foto" />
+            <img [src]="game.logo" />
           </ion-avatar>
           <ion-label>
             <h2>{{game.nome}}</h2>
@@ -51,7 +51,7 @@
               Plataformas:
               <ul class="plataformas">
                 <li *ngFor="let plataforma of game.plataformas">
-                  - {{ plataforma.description }}
+                  - {{ plataforma.descricao }}
                 </li>
               </ul>
             </h4>

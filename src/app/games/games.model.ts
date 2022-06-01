@@ -6,7 +6,7 @@ export interface Game {
   genero: Genero;
   preco: number;
   lancamento: Date;
-  foto: string;
+  logo: string;
   plataformas: Platform[];
 }
 

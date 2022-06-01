@@ -35,7 +35,7 @@ export class PlatformsPage implements OnInit {
       header: 'Cadastro de Plataformas',
       inputs: [
         {
-          name: 'description',
+          name: 'descricao',
           placeholder: 'Nome',
         },
         {

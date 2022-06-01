@@ -11,21 +11,21 @@ export class GamesApiService {
   constructor(private httpClient: HttpClient) {}
 
   getGames(): Observable<Game[]> {
-    return this.httpClient.get<Game[]>(`${environment.apiUrl}/games`);
+    return this.httpClient.get<Game[]>(`${environment.apiUrl}/jogos`);
   }
 
   remove(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${environment.apiUrl}/games/${id}`);
+    return this.httpClient.delete<void>(`${environment.apiUrl}/jogos/${id}`);
   }
 
   findById(id: number): Observable<Game> {
-    return this.httpClient.get<Game>(`${environment.apiUrl}/games/${id}`);
+    return this.httpClient.get<Game>(`${environment.apiUrl}/jogos/${id}`);
   }
 
   save(game: Game): Observable<Game> {
     if(game.id) {
-      return this.httpClient.put<Game>(`${environment.apiUrl}/games/${game.id}`, game);
+      return this.httpClient.put<Game>(`${environment.apiUrl}/jogos/${game.id}`, game);
     }
-    return this.httpClient.post<Game>(`${environment.apiUrl}/games`, game);
+    return this.httpClient.post<Game>(`${environment.apiUrl}/jogos`, game);
   }
 }

@@ -44,7 +44,9 @@ export class GamesRegisterPage
   ngOnInit() {
     console.log('GamesRegisterPage ngOnInit');
 
-    this.platformService.findAll().subscribe((platforms) => this.platforms = platforms);
+    this.platformService
+      .findAll()
+      .subscribe((platforms) => (this.platforms = platforms));
 
     this.form = this.formBuilder.group({
       id: [''],
@@ -53,7 +55,7 @@ export class GamesRegisterPage
       lancamento: [''],
       plataformas: [[]],
       genero: [Genero.ACAO, Validators.required],
-      foto: ['', Validators.required],
+      logo: ['', Validators.required],
     });
 
     const id = +this.activatedRoute.snapshot.params.id;
@@ -120,13 +122,20 @@ export class GamesRegisterPage
   }
 
   salvar() {
-    // const nome = this.form.value.nome;
-    const { nome } = this.form.value;
+    // const value = this.form.value;
+    const { value } = this.form;
+    const { id, nome } = value;
+
+    if (!id) {
+      delete value.id;
+    }
+
+    value.lancamento = value.lancamento.split('T')[0];
 
     this.loading = true;
 
     this.gamesApiService
-      .save(this.form.value)
+      .save(value)
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -137,10 +146,10 @@ export class GamesRegisterPage
           this.messageService.success(`Game ${nome} foi salvo sucesso!`);
           this.router.navigate(['games-list']);
         },
-        () => {
-          this.messageService.error(`Erro ao salvar o game ${nome}`, () =>
-            this.salvar()
-          );
+        ({ error }) => {
+          const erro = error?.erro ?? '';
+          const mensagem = `Erro ao salvar o game ${nome} ${erro ? ': '+erro:''}`;
+          this.messageService.error(mensagem, () => this.salvar());
         }
       );
   }
